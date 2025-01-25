@@ -12,9 +12,11 @@ import {
   Revenue,
 } from './definitions';
 import { formatCurrency } from './utils';
+import { resolve } from 'path';
 
 export async function fetchRevenue() {
   try {
+    await new Promise((resolve) => setTimeout(resolve, 3000));//3 segundos de delay
     const data = await client.sql<Revenue>`SELECT * FROM revenue`;
     return data.rows;
   } catch (error) {
@@ -26,6 +28,7 @@ export async function fetchRevenue() {
 export async function fetchLatestInvoices() {
   try {
     // Fetch the last 5 invoices, sorted by date
+    
     const data = await client.sql<LatestInvoiceRaw>`
     SELECT invoices.amount, customers.name, customers.image_url, customers.email
     FROM invoices
