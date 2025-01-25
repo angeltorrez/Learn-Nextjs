@@ -14,11 +14,8 @@ import {
 import { formatCurrency } from './utils';
 
 export async function fetchRevenue() {
-  try {
-    console.log("esperando a la carga del servidor");
-    await new Promise((resolve) => setTimeout(resolve, 3000));//3 segundos de delay
+  try {;//3 segundos de delay
     const data = await client.sql<Revenue>`SELECT * FROM revenue`;
-    console.log("la carga a finalizado luego de 3 segundos");
     return data.rows;
   } catch (error) {
     console.error('Database Error:', error);
